@@ -1,14 +1,14 @@
-html, body {
+/* html, body { */
     /* width: 100%; */
-    display: flex;
+    /* display: flex;
     flex-direction: column;
-}
+} */
 
-.nav-bar {
+/* .nav-bar {
     display: flex;
     justify-content: space-between;
-}
+} */
 
-.gif-results {
+/* .gif-results {
     flex-wrap: wrap;
-}
+} */
