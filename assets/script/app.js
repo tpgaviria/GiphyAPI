@@ -2,16 +2,15 @@
 // array of search terms
 var queries = [];
 
-if (localStorage.getItem('queries-array') === null) {
-    queries = ["love", "kiss", "i'm hungry", "hurry", "please", "i miss you", "give me attention"];
-} else {
-    queries = JSON.parse(localStorage.getItem('queries-array'));
-};
-
 
 
 function createButtons() {
 
+    if (localStorage.getItem('queries-array') === null) {
+        queries = ["love", "kiss", "i'm hungry", "hurry", "please", "i miss you", "give me attention"];
+    } else {
+        queries = JSON.parse(localStorage.getItem('queries-array'));
+    };
 
     $('.button-container').empty();
 
@@ -23,10 +22,27 @@ function createButtons() {
         $('.button-container').append(queryButton);
     }
 
+
+    var clearButton = $('<button>');
+    clearButton.addClass('clear-button')
+        .text('clear saved searches');
+
+    $('.button-container').append(clearButton);
+
+
     $(document).on('click', '.query-button', displayGifs);
+
+
+    $(document).on('click', '.clear-button', clearStorage);
 };
 
+function clearStorage() {
 
+    event.preventDefault();
+    localStorage.clear();
+    createButtons();
+
+};
 
 // when input submit button clicked, input text is added to queries array
 $('#add-term').on('click', function (event) {
