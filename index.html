@@ -4,35 +4,47 @@
 <head>
     <meta charset="utf-8">
     <title>More Than Words - Show Them How You Feel</title>
-    <link rel="stylesheet" type="text/css" href="assets/css/reset.css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
-    <link rel="stylesheet" media="screen and (max-width: 600px)" href="css/mobile.css" />
+    <!-- <link rel="stylesheet" media="screen and (max-width: 600px)" href="css/mobile.css" /> -->
 </head>
 
 <body>
 
-    <div class="navbar navbar-expand-md fixed-top">
-        
-        <div class="title">
-            <h1>More Than Words</h1>
-            <h3>Show them How You Feel - with Gifs!</h3>
-        </div>
-        <div class="search-bar">
-            <form class="search-input form-inline">
-                <input type="text" id="new-search">
+    <div class="container-fluid">
+
+
+        <nav class="navbar navbar-dark">
+
+         
+                <h1>More Than Words</h1>
+                <h3>Show them How You Feel - with Gifs!</h3>
+      
+
+
+        </nav>
+
+
+
+        <div class="row" id="buttons-bar">
+
+            <div class="col-6 button-container"></div>
+            <div class="col-1"></div>
+            <form class="search-input form-inline col search-bar d-flex justify-content-end">
+                <input type="text" id="new-search" placeholder="Search for a tag.......">
                 <button type="submit" id="add-term">Go</button>
             </form>
         </div>
 
+
+        <div class="row">
+            <div class="gif-results"></div>
+        </div>
+
+
     </div>
-
-    <div class="button-container"></div>
-
-    <div class="gif-results"></div>
-
-    </div>
-
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="assets/script/app.js"></script>

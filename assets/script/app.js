@@ -1,10 +1,17 @@
+// localStorage.clear();
 // array of search terms
-var queries = ["love", "kiss", "i'm hungry", "hurry", "please", "i miss you"];
+var queries = [];
 
+if (localStorage.getItem('queries-array') === null) {
+    queries = ["love", "kiss", "i'm hungry", "hurry", "please", "i miss you", "give me attention"];
+} else {
+    queries = JSON.parse(localStorage.getItem('queries-array'));
+};
 
 
 
 function createButtons() {
+
 
     $('.button-container').empty();
 
@@ -32,6 +39,8 @@ $('#add-term').on('click', function (event) {
     // input pushed into queries array
     queries.push(newTerm);
 
+
+    localStorage.setItem('queries-array', JSON.stringify(queries));
     //
     createButtons();
 
@@ -72,20 +81,17 @@ function displayGifs() {
 
         for (var i = 0; i < response.data.length; i++) {
             gifDiv = $('<div class="gif-box">');
-            rating = response.data[i].rating;
+            rating = response.data[i].rating.toUpperCase();
             stillImg = response.data[i].images.original_still.url;
 
             var gifImg = '<img src="' + stillImg + '" index="' + [i] + '">';
 
-
-            $('.gif-box img').attr('movement', 'still')
-                .addClass('gif');
-
-
             gifDiv.append(gifImg)
-                .append(rating);
+                .append('Rating: ' + rating);
 
             $('.gif-results').append(gifDiv);
+            $('.gif-box img').attr('movement', 'still')
+                .addClass('gif');
         }
 
     })
