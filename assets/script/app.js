@@ -1,19 +1,22 @@
-// localStorage.clear();
-// array of search terms
+// initialize array of search terms
 var queries = [];
 
-
-
+// function to create buttons with search terms
 function createButtons() {
 
+    // if there no local storage saved, show only default buttons
     if (localStorage.getItem('queries-array') === null) {
         queries = ["love", "kiss", "i'm hungry", "hurry", "please", "i miss you", "give me attention"];
+
+        // if there is relevant local storage present, use saved data as array to show buttons
     } else {
         queries = JSON.parse(localStorage.getItem('queries-array'));
     };
 
+    // clears any existing buttons
     $('.button-container').empty();
 
+    // for each item in array, create button with numbered term attribute
     for (var i = 0; i < queries.length; i++) {
         var queryButton = $('<button>');
         queryButton.addClass('query-button')
@@ -22,26 +25,27 @@ function createButtons() {
         $('.button-container').append(queryButton);
     }
 
-
+    // create a button to clear saved searches
     var clearButton = $('<button>');
     clearButton.addClass('clear-button')
         .text('clear saved searches');
 
+    // appends clear button last
     $('.button-container').append(clearButton);
 
-
-    $(document).on('click', '.query-button', displayGifs);
-
-
+    // when clear button clicked, run clearStorage function
     $(document).on('click', '.clear-button', clearStorage);
 };
 
-function clearStorage() {
 
+// any button with .query-button class will displayGifs when clicked
+$(document).on('click', '.query-button', displayGifs);
+
+// clearStorage functions for clear search button
+function clearStorage() {
     event.preventDefault();
     localStorage.clear();
     createButtons();
-
 };
 
 // when input submit button clicked, input text is added to queries array
@@ -52,17 +56,18 @@ $('#add-term').on('click', function (event) {
     // input saved as variable
     var newTerm = $('#new-search').val().trim();
 
-    // input pushed into queries array
+    // trimmed input pushed into queries array
     queries.push(newTerm);
 
-
+    // save new array with added input to localstorage
     localStorage.setItem('queries-array', JSON.stringify(queries));
-    //
+
+    // create new buttons with search input button added
     createButtons();
 
 })
 
-
+// initializing variable
 var stillImg;
 var apiPromise;
 
@@ -70,9 +75,10 @@ var apiPromise;
 // displays gifs using buttons 'term' attribute to generate appropriate query url
 function displayGifs() {
 
+    // clears current displayed gifs
     $('.gif-results').empty();
 
-    //refers to button's attribute of 'term'
+    //refers to button's attribute of 'term', which is its index in queries array
     var searchTerm = $(this).attr('term');
 
     // unique api key provided by api.giphy.com
@@ -86,15 +92,12 @@ function displayGifs() {
         url: queryURL
     }).then(function (response) {
 
+        // initializing variables for display
         var gifDiv;
         var rating;
         apiPromise = response;
 
-        console.log(searchTerm);
-        console.log(queryURL);
-        console.log(response);
-        console.log(response.data.length);
-
+        // for each gif in api's json, create gif box with still gif preview and rating
         for (var i = 0; i < response.data.length; i++) {
             gifDiv = $('<div class="gif-box">');
             rating = response.data[i].rating.toUpperCase();
@@ -109,11 +112,10 @@ function displayGifs() {
             $('.gif-box img').attr('movement', 'still')
                 .addClass('gif');
         }
-
     })
 }
 
-
+// all gifs, when clicked, will switch to moving gif and change movement attr to animate
 $(document).on('click', 'img.gif', function (event) {
 
     var movingImg;
